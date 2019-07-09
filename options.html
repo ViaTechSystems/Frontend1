@@ -20,27 +20,42 @@
     <link href="https://exactestate.sfo2.digitaloceanspaces.com/static/fontawesome-pro/css/all.css" rel="stylesheet"
           type="text/css"/>
 
+
     <style>
         .not_assigned {
-            height: 500px;
+			height: 100%;
             width: 100%;
             background-color: lightgrey;
+            overflow-y: scroll;
 
         }
 
         .assigned {
-            height: 500px;
+            height: inherit;
             width: 100%;
             background-color: yellow
 
         }
 
         .fill_me {
-            height: 100%; /* obviously won't work yet */
+           	height: 100%;
+            background-color: white;
+        }
+
+        .selected{
+        	background-color: blue;
+        }
+
+        .unselected{
+        	background-color: lightgrey;
+        	border-width: 1px;
         }
     </style>
 </head>
-<body>
+<body style="height: 100vh">
+
+
+<div class="instructions" style="display: none">
 <h2>Directions</h2>
 <p>The goal is to turn the select options into a well styled drag-and-drop interface.
     Any number of "Not Assigned Options" should be able to be selected and then dragged over to the "Assigned Options".
@@ -48,12 +63,42 @@
 
 
 <p>The height of the boxes holding the options should be responsive and fill the entire height of the remaining visible screen.</p>
-<div class="fill_me">
+</div>
+<!-- set the viewable to 88 to handle our ugly button-->
+<div class="fill_me" style="height: 94vh; width: 98vw">
 
-    <div class="row">
+    <div class="row h-100">
         <div class="col-md-6">
             <h2 class="text-center">Not Assigned Options</h2>
-            <select multiple class="not_assigned">
+
+            <div id="not_assigned" class="not_assigned h-100">
+            	<div value="1" class="unselected" draggable="true">One</div>
+            	<div value="2" class="unselected" draggable="true">Two</div>
+            	<div value="3" class="unselected" draggable="true">Three</div>
+            	<div value="4" class="unselected" draggable="true">Four</div>
+            	<div value="5" class="unselected" draggable="true">Five</div>
+            	<div value="6" class="unselected" draggable="true">Six</div>
+            	<div value="7" class="unselected" draggable="true">Seven</div>
+            	<div value="8" class="unselected" draggable="true">Eight</div>
+            	<div value="9" class="unselected" draggable="true">Nine</div>
+            	<div value="10" class="unselected" draggable="true">Ten</div>
+            	<div value="11" class="unselected" draggable="true">Eleven</div>
+            	<div value="12" class="unselected" draggable="true">Twelve</div>
+            	<div value="13" class="unselected" draggable="true">Thirteen</div>
+            	<div value="14" class="unselected" draggable="true">Fourteen</div>
+            	<div value="15" class="unselected" draggable="true">Fifteen</div>
+            	<div value="16" class="unselected" draggable="true">Sixteen</div>
+            	<div value="17" class="unselected" draggable="true">Seventeen</div>
+            	<div value="18" class="unselected" draggable="true">Eighteen</div>
+            	<div value="19" class="unselected" draggable="true">Nineteen</div>
+            	<div value="20" class="unselected" draggable="true">Twenty</div>
+            	<div value="21" class="unselected" draggable="true">Twenty-One</div>
+            	<div value="22" class="unselected" draggable="true">Twenty-Two</div>
+            	<div value="23" class="unselected" draggable="true">Twenty-Three</div>
+            	<div value="24" class="unselected" draggable="true">Twenty-Four</div>
+            	<div value="25" class="unselected" draggable="true">Twenty-Five</div>
+            </div>
+           <!--  <select multiple class="not_assigned h-100" id="not_assigned" draggable="true">
                 <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option>
@@ -79,18 +124,112 @@
                 <option value="23">Twenty-Three</option>
                 <option value="24">Twenty-Four</option>
                 <option value="25">Twenty-Five</option>
-            </select>
+            </select> -->
         </div>
-
-        <div class="col-md-6">
+        <div class="col-md-6 h-100">
             <h2 class="text-center">Assigned Options</h2>
-            <select multiple class="assigned">
+			<div id="assigned" class="assigned h-100">
 
-            </select>
+			</div>
         </div>
+
     </div>
 </div>
 
+	<script type="text/javascript">
+		//initialize the listener for dragging... if a select option could have the listener added...
+		(function initialize(){
 
+
+			$(".unselected").each(function(){
+				this.addEventListener('mouseup', 
+					function (){
+					console.log(this.getAttribute('class'));
+					if(this.getAttribute('class') == "unselected"){
+						this.setAttribute('class', "selected");
+					}else{
+						this.setAttribute('class', "unselected")
+					}
+				}
+				)
+			});
+
+			document.addEventListener("dragover", function(event) {
+				  event.preventDefault();
+				});
+
+			document.getElementById("assigned").addEventListener('drop', 
+			function (){
+				//remove previously selected items
+				//document.getElementById("assigned").innerHTML = "";
+				//run this for each selected item
+				$(".selected").each(function(){
+					console.log(this.innerHTML);
+					//create the option element that will be appended
+					var newOption = document.createElement("DIV");
+					//assign value and innerhtml (text)
+					newOption.value = this.value;
+					newOption.innerHTML = this.innerHTML;
+					newOption.className = "selected";
+
+					//append the element
+					document.getElementById("assigned").appendChild(newOption);
+					this.innerHTML="";
+
+					//do we need to remove the items from the list? if so do it here
+				}
+				)
+
+			});
+
+			// document.getElementById("testBtn").addEventListener('click', 
+			// function (){
+			// 	//remove previously selected items
+			// 	document.getElementById("assigned").innerHTML = "";
+			// 	//run this for each selected item
+			// 	$("#not_assigned option:selected").each(function(){
+			// 		console.log(this.innerHTML);
+			// 		//create the option element that will be appended
+			// 		var newOption = document.createElement("OPTION");
+			// 		//assign value and innerhtml (text)
+			// 		newOption.value = this.value;
+			// 		newOption.innerHTML = this.innerHTML;
+			// 		//append the element
+			// 		document.getElementById("assigned").appendChild(newOption);
+			// 		//select the elements
+			// 		newOption.selected = 'selected';
+
+			// 		//do we need to remove the items from the list? if so do it here
+			// 	}
+			// 	)
+
+			// });
+			// document.getElementById("testBtn").addEventListener('click', 
+			// function (){
+			// 	//remove previously selected items
+			// 	document.getElementById("assigned").innerHTML = "";
+			// 	//run this for each selected item
+			// 	$(".selected").each(function(){
+			// 		console.log(this.innerHTML);
+			// 		//create the option element that will be appended
+			// 		var newOption = document.createElement("DIV");
+			// 		//assign value and innerhtml (text)
+			// 		newOption.value = this.value;
+			// 		newOption.innerHTML = this.innerHTML;
+			// 		newOption.className = "selected";
+			// 		//append the element
+			// 		document.getElementById("assigned").appendChild(newOption);
+			// 		//select the elements
+
+			// 		//do we need to remove the items from the list? if so do it here
+			// 	}
+			// 	)
+
+			// });
+		})();
+
+	
+	
+	</script>
 </body>
 
