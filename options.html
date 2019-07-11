@@ -34,61 +34,55 @@
             background-color: yellow
 
         }
-
-        .fill_me {
-            height: 100%; /* obviously won't work yet */
-        }
     </style>
 </head>
 <body>
 <h2>Directions</h2>
-<p>The goal is to turn the select options into a <span style="font-weight:bold">well styled</span> drag-and-drop interface.
-    Any number of "Not Assigned Options" should be able to be selected and then dragged over to the "Assigned Options" and vice-versa.
-    Once options are dragged over, they should continue to be selected for easy manipulation. </p>
+<p>The goal is to turn the select options into a <span style="font-weight:bold">well styled drag-and-drop interface</span>.
+    Any number of "Not Assigned Options" should be able to be selected and then dragged over to the "Assigned Options" and vice-versa (dragging works both ways).
+    Once options are dragged over, they should continue to be selected in the event the user wishes to transfer them back. </p>
 
 
-<p>The height of the boxes holding the options should be responsive and fill the entire height of the remaining visible screen.</p>
-<p style="font-weight:bold;"> If you have any question ask Matt. </p>
-<div class="fill_me">
+<p>The height of the boxes holding the options should be responsive and fill the entire height of the remaining visible screen. Meaning if the screen size increases, the boxes grow. If the screen size decreases, the boxes shrink to fit.</p>
+<p style="font-weight:bold;"> If you have any question ask Matt. <span style="text-decoration: underline;"> You can change whatever code you want in this document.</span> </p>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h2 class="text-center">Not Assigned Options</h2>
-            <select multiple class="not_assigned">
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                <option value="4">Four</option>
-                <option value="5">Five</option>
-                <option value="6">Six</option>
-                <option value="7">Seven</option>
-                <option value="8">Eight</option>
-                <option value="9">Nine</option>
-                <option value="10">Ten</option>
-                <option value="11">Eleven</option>
-                <option value="12">Twelve</option>
-                <option value="13">Thirteen</option>
-                <option value="14">Fourteen</option>
-                <option value="15">Fifteen</option>
-                <option value="16">Sixteen</option>
-                <option value="17">Seventeen</option>
-                <option value="18">Eighteen</option>
-                <option value="19">Nineteen</option>
-                <option value="20">Twenty</option>
-                <option value="21">Twenty-One</option>
-                <option value="22">Twenty-Two</option>
-                <option value="23">Twenty-Three</option>
-                <option value="24">Twenty-Four</option>
-                <option value="25">Twenty-Five</option>
-            </select>
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-center">Not Assigned Options</h2>
+        <select multiple class="not_assigned">
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+            <option value="6">Six</option>
+            <option value="7">Seven</option>
+            <option value="8">Eight</option>
+            <option value="9">Nine</option>
+            <option value="10">Ten</option>
+            <option value="11">Eleven</option>
+            <option value="12">Twelve</option>
+            <option value="13">Thirteen</option>
+            <option value="14">Fourteen</option>
+            <option value="15">Fifteen</option>
+            <option value="16">Sixteen</option>
+            <option value="17">Seventeen</option>
+            <option value="18">Eighteen</option>
+            <option value="19">Nineteen</option>
+            <option value="20">Twenty</option>
+            <option value="21">Twenty-One</option>
+            <option value="22">Twenty-Two</option>
+            <option value="23">Twenty-Three</option>
+            <option value="24">Twenty-Four</option>
+            <option value="25">Twenty-Five</option>
+        </select>
+    </div>
 
-        <div class="col-md-6">
-            <h2 class="text-center">Assigned Options</h2>
-            <select multiple class="assigned">
+    <div class="col-md-6">
+        <h2 class="text-center">Assigned Options</h2>
+        <select multiple class="assigned">
 
-            </select>
-        </div>
+        </select>
     </div>
 </div>
 
