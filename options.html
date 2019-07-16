@@ -22,18 +22,52 @@
 
     <style>
         .not_assigned {
-            height: 500px;
-            width: 100%;
-            background-color: lightgrey;
+            height: auto;
+            width: 90%;
+            background-color: white;
 
+
+        }
+        /*
+        div[class*="col-"] {
+        	padding: 15px;
+        }*/
+
+        .col-6{
+        		border: 1px solid black;
+        		width: 20vw;
+        		
+
+        }
+        /*
+        .col-2{
+        	width: 40%; 
+        	float: left;
+        }*/
+        .main{
+        	margin-right: 15vh;
+        	margin-left: 15vh;
         }
 
         .assigned {
-            height: 500px;
+            height: auto;
             width: 100%;
-            background-color: yellow
+            padding: 2vh;
 
-        }
+            
+           }
+
+         sdiv .drag{
+         	
+         	border: 1px solid black;
+         	height: 50px;
+         	width: 50px;
+         	line-height: 50px;
+         	text-align: center;
+         }
+
+
+        
     </style>
 </head>
 <body>
@@ -46,45 +80,94 @@
 <p>The height of the boxes holding the options should be responsive and fill the entire height of the remaining visible screen. Meaning if the screen size increases, the boxes grow. If the screen size decreases, the boxes shrink to fit.</p>
 <p style="font-weight:bold;"> If you have any question ask Matt. <span style="text-decoration: underline;"> You can change whatever code you want in this document.</span> </p>
 
-<div class="row">
-    <div class="col-md-6">
-        <h2 class="text-center">Not Assigned Options</h2>
-        <select multiple class="not_assigned">
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-            <option value="4">Four</option>
-            <option value="5">Five</option>
-            <option value="6">Six</option>
-            <option value="7">Seven</option>
-            <option value="8">Eight</option>
-            <option value="9">Nine</option>
-            <option value="10">Ten</option>
-            <option value="11">Eleven</option>
-            <option value="12">Twelve</option>
-            <option value="13">Thirteen</option>
-            <option value="14">Fourteen</option>
-            <option value="15">Fifteen</option>
-            <option value="16">Sixteen</option>
-            <option value="17">Seventeen</option>
-            <option value="18">Eighteen</option>
-            <option value="19">Nineteen</option>
-            <option value="20">Twenty</option>
-            <option value="21">Twenty-One</option>
-            <option value="22">Twenty-Two</option>
-            <option value="23">Twenty-Three</option>
-            <option value="24">Twenty-Four</option>
-            <option value="25">Twenty-Five</option>
-        </select>
-    </div>
+<div class="main">
+		<div class="row">
+		    <div class="col-6 not_assigned"  id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+		        <h2 class="text-center">Not Assigned Options</h2>
 
-    <div class="col-md-6">
-        <h2 class="text-center">Assigned Options</h2>
-        <select multiple class="assigned">
+		        	<div id="span1" class="drag" draggable="true" ondragstart="drag(event)" ondrop="highlight(event)" >One</div>
+		        	<div id="span2" class="drag" draggable="true" ondragstart="drag(event)">Two</div>
+		        	<div id="span3" class="drag" draggable="true" ondragstart="drag(event)">Three</div>
+		        	<div id="span4" class="drag" draggable="true" ondragstart="drag(event)">Four</div>
+		        	<div id="span5" class="drag" draggable="true" ondragstart="drag(event)">Five</div>
+		        	<div id="span6" class="drag" draggable="true" ondragstart="drag(event)">Six</div>
+		        	<div id="span7" class="drag" draggable="true" ondragstart="drag(event)">Seven</div>
 
-        </select>
-    </div>
+
+
+
+
+
+
+		        <!--
+		        <select multiple class="not_assigned" >
+		            <option value="1" id="drag2">One</option>
+		            <option value="2">Two</option>
+		            <option value="3">Three</option>
+		            <option value="4">Four</option>
+		            <option value="5">Five</option>
+		            <option value="6">Six</option>
+		            <option value="7">Seven</option>
+		            <option value="8">Eight</option>
+		            <option value="9">Nine</option>
+		            <option value="10">Ten</option>
+		            <option value="11">Eleven</option>
+		            <option value="12">Twelve</option>
+		            <option value="13">Thirteen</option>
+		            <option value="14">Fourteen</option>
+		            <option value="15">Fifteen</option>
+		            <option value="16">Sixteen</option>
+		            <option value="17">Seventeen</option>
+		            <option value="18">Eighteen</option>
+		            <option value="19">Nineteen</option>
+		            <option value="20">Twenty</option>
+		            <option value="21">Twenty-One</option>
+		            <option value="22">Twenty-Two</option>
+		            <option value="23">Twenty-Three</option>
+		            <option value="24">Twenty-Four</option>
+		            <option value="25">Twenty-Five</option>
+		        </select>-->
+		    </div>
+
+		    <div class="col-6 assigned" ondrop="drop(event)" ondragover="allowDrop(event)" >
+		        <h2 class="text-center">Assigned Options</h2>
+		        
+		    </div>
+
+		</div>
 </div>
+
+<script>
+
+	function allowDrop(ev) {
+	  ev.preventDefault(); //cancels event if cancellable
+	}
+
+	function drag(ev) {
+	  ev.dataTransfer.setData("text", ev.target.id); //hold data for the drag and drop
+	}
+
+	function drop(ev) {
+	  ev.preventDefault();
+	  var data = ev.dataTransfer.getData("text"); //get data from span
+	  ev.target.appendChild(document.getElementById(data)); //appends data to either side
+
+	  var thing = document.getElementById(data); //list item getting highlighted]
+	  thing.style.color = 'green'; //makes color green after drop
+
+	  setTimeout(function(){
+	  	thing.style.color = 'black' //changes color to black after 2 seconds
+
+	  }, 2000)
+	  
+	}
+	function highlight(ev){
+		this.style.color = "green";
+	}
+	
+
+
+</script>
 
 
 </body>
